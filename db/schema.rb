@@ -32,6 +32,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_05_021052) do
     t.datetime "refund_date", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.string "description", null: false
     t.integer "status", default: 0, null: false
+    t.integer "kind", default: 0, null: false
+    t.integer "refund_origin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["wallet_id"], name: "index_refunds_on_wallet_id"
@@ -61,6 +63,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_05_021052) do
   end
 
   add_foreign_key "earnings", "wallets", column: "wallets_id"
+  add_foreign_key "refunds", "refunds", column: "refund_origin_id"
   add_foreign_key "refunds", "wallets"
   add_foreign_key "wallets", "users"
 end
