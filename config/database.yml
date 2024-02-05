@@ -1,0 +1,27 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: ecomicx_development
+  username: postgres
+  password: postgres
+  host: 172.22.0.3
+
+test:
+  <<: *default
+  database: ecomicx_test
+  host: 172.22.0.3
+  username: postgres
+  password: postgres
+#
+production:
+  <<: *default
+  database: ecomicx_production
+  username: mytest
+  password: <%= ENV["MYTEST_DATABASE_PASSWORD"] %>
+  host: 172.22.0.3
